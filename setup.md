@@ -20,3 +20,11 @@
 ```
 npm run eject
 ```
+
++ src目录下clone源码
+```
+git clone https://github.com/robin2017/react.git
+```
+此时项目中并没有包含源码项目，而是分开管理！！
+
+## 3、修改配置

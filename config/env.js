@@ -96,6 +96,10 @@ function getClientEnvironment(publicUrl) {
       env[key] = JSON.stringify(raw[key]);
       return env;
     }, {}),
+    // bota:属性添加
+    "__DEV__": true,
+    "__PROFILE__": true,
+    "__UMD__": true
   };
 
   return { raw, stringified };

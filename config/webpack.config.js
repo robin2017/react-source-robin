@@ -186,16 +186,21 @@ module.exports = function (webpackEnv) {
     return loaders;
   };
 
+ 
+ 
+debugger
   return {
     target: ['browserslist'],
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+    // devtool: isEnvProduction
+    //   ? shouldUseSourceMap
+    //     ? 'source-map'
+    //     : false
+    //   : isEnvDevelopment && 'cheap-module-source-map',
+    // bota：变量替换
+    devtool:'source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: paths.appIndexJs,
@@ -307,16 +312,29 @@ module.exports = function (webpackEnv) {
       extensions: paths.moduleFileExtensions
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
+      // alias: {
+      //   // Support React Native Web
+      //   // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+      //   'react-native': 'react-native-web',
+      //   // Allows for better profiling with ReactDevTools
+      //   ...(isEnvProductionProfile && {
+      //     'react-dom$': 'react-dom/profiling',
+      //     'scheduler/tracing': 'scheduler/tracing-profiling',
+      //   }),
+      //   ...(modules.webpackAliases || {}),
+      // },
+      // bota：变量替换
       alias: {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        'react-native': 'react-native-web',
-        // Allows for better profiling with ReactDevTools
-        ...(isEnvProductionProfile && {
-          'react-dom$': 'react-dom/profiling',
-          'scheduler/tracing': 'scheduler/tracing-profiling',
-        }),
-        ...(modules.webpackAliases || {}),
+        // 'react-native': 'react-native-web',
+        'react': path.resolve(__dirname, '../src/react/packages/react'),
+        'react-dom': path.resolve(__dirname, '../src/react/packages/react-dom'),
+        'legacy-events': path.resolve(__dirname, '../src/react/packages/legacy-events'),
+        'shared': path.resolve(__dirname, '../src/react/packages/shared'),
+        'react-reconciler': path.resolve(__dirname, '../src/react/packages/react-reconciler'),
+        // 'react-events': path.resolve(__dirname, '../src/react/packages/events'),
+        // 'scheduler': path.resolve(__dirname, '../src/react/packages/scheduler'),
       },
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).
