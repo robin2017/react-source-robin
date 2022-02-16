@@ -16,7 +16,7 @@
 ```
 ![pic](./images/suc.jpg)
 
-+ 暴露配置，多一个config文件夹
++ 暴露配置，多了config/scripts文件夹
 ```
 npm run eject
 ```
